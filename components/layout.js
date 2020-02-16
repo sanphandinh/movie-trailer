@@ -1,9 +1,12 @@
-import Nav from './nav';
+import Header from './header';
+import Footer from './footer';
 
-const Layout = props => (
-  <div>
-    <Nav />
-    {props.children}
+const Layout = ({ children, homeSlider }) => (
+  <div className="wrapper">
+    <Header />
+    {homeSlider}
+    <main className="content">{children}</main>
+    <Footer />
   </div>
 );
 

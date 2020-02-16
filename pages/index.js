@@ -1,52 +1,379 @@
 import React from 'react';
-import Head from 'next/head';
 import Layout from '../components/layout';
-import Link from 'next/link';
-import fetch from 'isomorphic-unfetch';
-import useSWR from 'swr';
-import { useRouter } from 'next/router';
+import HomeSlider from '../components/home_slider';
 
-function fetcher(url) {
-  return fetch(url).then(r => r.json());
-}
 export default function Index() {
-  const { query } = useRouter();
-  const { data, error } = useSWR(
-    `/api/randomQuote${query.author ? '?author=' + query.author : ''}`,
-    fetcher
-  );
-  // The following line has optional chaining, added in Next.js v9.1.5,
-  // is the same as `data && data.author`
-  const author = data?.author;
-  let quote = data?.quote;
-
-  if (!data) quote = 'Loading...';
-  if (error) quote = 'Failed to fetch the quote.';
-
   return (
-    <main className="center">
-      <div className="quote">{quote}</div>
-      {author && <span className="author">- {author}</span>}
+    <Layout homeSlider={<HomeSlider />}>
+      <main className="center">
+        <section className="panel">
+          <h2>Recently Added</h2>
+          <div className="recentslider">
+            <div className="swiper-container">
+              <div className="swiper-wrapper">
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/9.jpg" />
+                    <h3 className="hometitle">Space Betwen Us</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/2.jpg" />
+                    <h3 className="hometitle">John Wick</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/3.jpg" />
+                    <h3 className="hometitle">Spider-Man Homecoming</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/4.jpg" />
+                    <h3 className="hometitle">Beauty and the Beast</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/5.jpg" />
+                    <h3 className="hometitle">
+                      Pirates of the Caribbean: Dead Men Tell No Tales
+                    </h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/6.jpg" />
+                    <h3 className="hometitle">Fifty Shades Darker</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/7.jpg" />
+                    <h3 className="hometitle">Transformers: The Last Knight</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/8.jpg" />
+                    <h3 className="hometitle">xXx: Return of Xander Cage</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/9.jpg" />
+                    <h3 className="hometitle">Space Betwen Us</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/2.jpg" />
+                    <h3 className="hometitle">John Wick</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/3.jpg" />
+                    <h3 className="hometitle">Spider-Man Homecoming</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/4.jpg" />
+                    <h3 className="hometitle">Beauty and the Beast</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/5.jpg" />
+                    <h3 className="hometitle">
+                      Pirates of the Caribbean: Dead Men Tell No Tales
+                    </h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/6.jpg" />
+                    <h3 className="hometitle">Fifty Shades Darker</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/7.jpg" />
+                    <h3 className="hometitle">Transformers: The Last Knight</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/8.jpg" />
+                    <h3 className="hometitle">xXx: Return of Xander Cage</h3>
+                  </a>
+                </div>
 
-      <style jsx>{`
-        main {
-          width: 90%;
-          max-width: 900px;
-          margin: 300px auto;
-          text-align: center;
-        }
-        .quote {
-          font-family: cursive;
-          color: #e243de;
-          font-size: 24px;
-          padding-bottom: 10px;
-        }
-        .author {
-          font-family: sans-serif;
-          color: #559834;
-          font-size: 20px;
-        }
-      `}</style>
-    </main>
+                <div className="swiper-slide">
+                  <a href="mostwatched.html">
+                    <img src="img/others.png" />
+                  </a>
+                </div>
+              </div>
+              <div className="nextdirection recent-next">
+                <img src="img/right-arrow.svg" />{' '}
+              </div>
+              <div className="leftdirection recent-prev">
+                <img src="img/left-arrow.svg" />{' '}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="panel">
+          <h2>Most Watched</h2>
+          <div className="mostslider">
+            <div className="swiper-container">
+              <div className="swiper-wrapper">
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/9.jpg" />
+                    <h3 className="hometitle">Space Betwen Us</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/2.jpg" />
+                    <h3 className="hometitle">John Wick</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/3.jpg" />
+                    <h3 className="hometitle">Spider-Man Homecoming</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/4.jpg" />
+                    <h3 className="hometitle">Beauty and the Beast</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/5.jpg" />
+                    <h3 className="hometitle">
+                      Pirates of the Caribbean: Dead Men Tell No Tales
+                    </h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/6.jpg" />
+                    <h3 className="hometitle">Fifty Shades Darker</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/7.jpg" />
+                    <h3 className="hometitle">Transformers: The Last Knight</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/8.jpg" />
+                    <h3 className="hometitle">xXx: Return of Xander Cage</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/9.jpg" />
+                    <h3 className="hometitle">Space Betwen Us</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/2.jpg" />
+                    <h3 className="hometitle">John Wick</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/3.jpg" />
+                    <h3 className="hometitle">Spider-Man Homecoming</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/4.jpg" />
+                    <h3 className="hometitle">Beauty and the Beast</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/5.jpg" />
+                    <h3 className="hometitle">
+                      Pirates of the Caribbean: Dead Men Tell No Tales
+                    </h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/6.jpg" />
+                    <h3 className="hometitle">Fifty Shades Darker</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/7.jpg" />
+                    <h3 className="hometitle">Transformers: The Last Knight</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/8.jpg" />
+                    <h3 className="hometitle">xXx: Return of Xander Cage</h3>
+                  </a>
+                </div>
+
+                <div className="swiper-slide">
+                  <a href="mostwatched.html">
+                    <img src="img/others.png" />
+                  </a>
+                </div>
+              </div>
+              <div className="nextdirection most-next">
+                <img src="img/right-arrow.svg" />{' '}
+              </div>
+              <div className="leftdirection most-prev">
+                <img src="img/left-arrow.svg" />{' '}
+              </div>
+              {/* <!-- Add Pagination --> */}
+            </div>
+          </div>
+        </section>
+
+        <section className="panel">
+          <h2>Top Rated</h2>
+          <div className="topslider">
+            <div className="swiper-container">
+              <div className="swiper-wrapper">
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/9.jpg" />
+                    <h3 className="hometitle">Space Betwen Us</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/2.jpg" />
+                    <h3 className="hometitle">John Wick</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/3.jpg" />
+                    <h3 className="hometitle">Spider-Man Homecoming</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/4.jpg" />
+                    <h3 className="hometitle">Beauty and the Beast</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/5.jpg" />
+                    <h3 className="hometitle">
+                      Pirates of the Caribbean: Dead Men Tell No Tales
+                    </h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/6.jpg" />
+                    <h3 className="hometitle">Fifty Shades Darker</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/7.jpg" />
+                    <h3 className="hometitle">Transformers: The Last Knight</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/8.jpg" />
+                    <h3 className="hometitle">xXx: Return of Xander Cage</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/9.jpg" />
+                    <h3 className="hometitle">Space Betwen Us</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/2.jpg" />
+                    <h3 className="hometitle">John Wick</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/3.jpg" />
+                    <h3 className="hometitle">Spider-Man Homecoming</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/4.jpg" />
+                    <h3 className="hometitle">Beauty and the Beast</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/5.jpg" />
+                    <h3 className="hometitle">
+                      Pirates of the Caribbean: Dead Men Tell No Tales
+                    </h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/6.jpg" />
+                    <h3 className="hometitle">Fifty Shades Darker</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/7.jpg" />
+                    <h3 className="hometitle">Transformers: The Last Knight</h3>
+                  </a>
+                </div>
+                <div className="swiper-slide">
+                  <a href="single.html">
+                    <img src="images/8.jpg" />
+                    <h3 className="hometitle">xXx: Return of Xander Cage</h3>
+                  </a>
+                </div>
+
+                <div className="swiper-slide">
+                  <a href="mostwatched.html">
+                    <img src="img/others.png" />
+                  </a>
+                </div>
+              </div>
+              <div className="nextdirection top-next">
+                <img src="img/right-arrow.svg" />{' '}
+              </div>
+              <div className="leftdirection top-prev">
+                <img src="img/left-arrow.svg" />{' '}
+              </div>
+              {/* <!-- Add Pagination --> */}
+            </div>
+          </div>
+        </section>
+      </main>
+    </Layout>
   );
 }
