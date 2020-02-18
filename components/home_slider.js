@@ -1,5 +1,5 @@
 import React from 'react';
-import SwiperReact from './swiper';
+import SwiperReact, { DEFAULT_RENDER_PAGINATION } from './swiper';
 
 const SLIDES = [
   {
@@ -44,6 +44,7 @@ const HomeSlider = () => (
       preventClicksPropagation={false}
       useDefaultPagination
       pagination={{ clickable: true }}
+      renderPagination={DEFAULT_RENDER_PAGINATION}
       renderSlides={() =>
         SLIDES.map(({ url, title, description }, index) => {
           return (

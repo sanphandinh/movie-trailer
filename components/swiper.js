@@ -1,15 +1,33 @@
 import React, { useRef, useEffect } from 'react';
 import Swiper from 'swiper';
 
+export const DEFAULT_RENDER_PAGINATION = _ref => (
+  <div ref={_ref} className="swiper-pagination"></div>
+);
+
+export const DEFAULT_RENDER_SCROLLBAR = _ref => (
+  <div ref={_ref} className="swiper-scrollbar"></div>
+);
+
+export const DEFAULT_RENDER_NEXT_NAVIGATION = _ref => (
+  <div ref={_ref} className="swiper-button-next"></div>
+);
+
+export const DEFAULT_RENDER_PREV_NAVIGATION = _ref => (
+  <div ref={_ref} className="swiper-button-prev"></div>
+);
+
 const SwiperReact = ({
   getSwiperInstance,
   renderSlides,
   pagination,
   scrollbar,
   navigation,
-  useDefaultPagination,
-  useDefaultScrollbar,
-  useDefaultNavigation,
+  renderPagination,
+  renderScrollbar,
+  renderPrevNavigation,
+  renderNextNavigation,
+  children,
   ...rest
 }) => {
   const _ref = useRef(null);
@@ -21,28 +39,25 @@ const SwiperReact = ({
   useEffect(() => {
     if (_ref.current) {
       const option = { ...rest };
-      if (pagination) {
-        if (useDefaultPagination && _paginationRef.current) {
-          option.pagination = { el: _paginationRef.current };
-        }
-        option.pagination = { ...option.pagination, ...pagination };
+      if (renderPagination) {
+        option.pagination = { el: _paginationRef.current, ...pagination };
       }
-      if (scrollbar) {
-        if (useDefaultScrollbar && _scrollbarRef.current) {
-          option.scrollbar = { el: _scrollbarRef.current };
-        }
-        option.scrollbar = { ...option.scrollbar, ...scrollbar };
+      if (renderScrollbar) {
+        option.scrollbar = { el: _scrollbarRef.current, ...scrollbar };
       }
-      if (navigation) {
-        if (useDefaultNavigation && _navigationNextRef.current) {
-          option.scrollbar = { nextEl: _navigationNextRef.current };
+      if (renderPrevNavigation || renderNextNavigation) {
+        if (renderNextNavigation) {
+          option.navigation = { nextEl: _navigationNextRef.current };
         }
-        if (useDefaultNavigation && _navigationPrevRef.current) {
-          option.scrollbar = { prevEl: _navigationPrevRef.current };
+        if (renderPrevNavigation) {
+          option.navigation = {
+            ...option.navigation,
+            prevEl: _navigationPrevRef.current
+          };
         }
         option.navigation = { ...option.navigation, ...navigation };
       }
-      console.warn('option: ', option);
+      // console.warn('option: ', option);
       const _swiper = new Swiper(_ref.current, option);
       _swiperRef.current = _swiper;
       if (getSwiperInstance) {
@@ -54,22 +69,15 @@ const SwiperReact = ({
     <div ref={_ref} className="swiper-container">
       <div className="swiper-wrapper">{renderSlides(_swiperRef?.current)}</div>
       {/* <!-- If we need pagination --> */}
-      {useDefaultPagination && (
-        <div ref={_paginationRef} className="swiper-pagination"></div>
-      )}
+      {renderPagination && renderPagination(_paginationRef)}
 
       {/* <!-- If we need navigation buttons --> */}
-      {useDefaultNavigation && (
-        <>
-          <div ref={_navigationPrevRef} className="swiper-button-prev"></div>
-          <div ref={_navigationNextRef} className="swiper-button-next"></div>
-        </>
-      )}
+      {renderPrevNavigation && renderPrevNavigation(_navigationPrevRef)}
+      {renderNextNavigation && renderNextNavigation(_navigationNextRef)}
 
       {/* <!-- If we need scrollbar --> */}
-      {useDefaultScrollbar && (
-        <div ref={_scrollbarRef} className="swiper-scrollbar"></div>
-      )}
+      {renderScrollbar && renderScrollbar(_scrollbarRef)}
+      {children}
     </div>
   );
 };
