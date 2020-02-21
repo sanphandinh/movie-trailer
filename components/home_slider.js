@@ -1,5 +1,6 @@
 import React from 'react';
 import SwiperReact, { DEFAULT_RENDER_PAGINATION } from './swiper';
+import Image from './image';
 
 const SLIDES = [
   {
@@ -19,7 +20,7 @@ const SLIDES = [
   }
 ];
 
-const HomeSlider = () => (
+const HomeSlider = ({ slides }) => (
   <div className="homeslider">
     <SwiperReact
       breakpoints={{
@@ -46,15 +47,15 @@ const HomeSlider = () => (
       pagination={{ clickable: true }}
       renderPagination={DEFAULT_RENDER_PAGINATION}
       renderSlides={() =>
-        SLIDES.map(({ url, title, description }, index) => {
+        slides.map(({ backdrop_path, title, overview, id }, index) => {
           return (
-            <div key={url + index} className="swiper-slide">
-              <img src={url} />
+            <div key={id} className="swiper-slide">
+              <Image size="w1280" src={backdrop_path} />
               <div className="caption">
                 <div className="captioninside">
                   <h3>{title}</h3>
-                  <p>{description}</p>
-                  <a href="single.html" className="playbutton">
+                  <p>{overview}</p>
+                  <a href={`/movie/${id}`} className="playbutton">
                     Play
                   </a>
                 </div>
@@ -66,5 +67,9 @@ const HomeSlider = () => (
     />
   </div>
 );
+
+HomeSlider.defaultProps = {
+  slides: []
+};
 
 export default HomeSlider;

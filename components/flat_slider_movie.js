@@ -1,5 +1,6 @@
 import SwiperReact from './swiper';
 import Link from 'next/link';
+import Image from './image';
 
 const FlatSliderMovie = ({ movies, viewOtherUrl }) => {
   return (
@@ -41,12 +42,14 @@ const FlatSliderMovie = ({ movies, viewOtherUrl }) => {
       pagination={{ clickable: true }}
       renderSlides={() => (
         <>
-          {movies.map(({ imgUrl, title, id }) => (
+          {movies.map(({ poster_path, title, id }) => (
             <div className="swiper-slide" key={id}>
-              <a href="single.html">
-                <img src={imgUrl} />
-                <h3 className="hometitle">{title}</h3>
-              </a>
+              <Link href={`/movie/${id}`}>
+                <a>
+                  <Image src={poster_path} size="w185" />
+                  <h3 className="hometitle">{title}</h3>
+                </a>
+              </Link>
             </div>
           ))}
           {viewOtherUrl && (
