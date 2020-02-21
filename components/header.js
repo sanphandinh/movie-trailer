@@ -1,4 +1,35 @@
+import { useSelector } from 'react-redux';
+import Link from 'next/link';
+
+const HeaderMenu = ({ title, list = [], titleUrl, itemRender }) => {
+  return (
+    <li>
+      <Link href={titleUrl || ''}>
+        <a>{title}</a>
+      </Link>
+      {!!list.length && <ul className="menu-list">{list.map(itemRender)}</ul>}
+      <style jsx>{`
+        .menu-list {
+          max-height: 300px;
+          overflow-y: auto;
+        }
+      `}</style>
+    </li>
+  );
+};
+
+const getYearMenu = () => {
+  const currentDate = new Date().getFullYear();
+  return [
+    { id: currentDate, name: currentDate + '' },
+    { id: currentDate - 1, name: currentDate - 1 + '' },
+    { id: currentDate - 2, name: currentDate - 2 + '' },
+    { id: currentDate - 3, name: currentDate - 3 + '' }
+  ];
+};
+
 const Header = () => {
+  const genres = useSelector(state => state.genres) || [];
   return (
     <header className="header">
       <figure className="logo">
@@ -8,56 +39,38 @@ const Header = () => {
       </figure>
       <nav className="menu">
         <ul>
+          <HeaderMenu title="Home" titleUrl="/" />
+          <HeaderMenu
+            title="Genres"
+            list={genres}
+            itemRender={({ id, name }) => (
+              <li key={id}>
+                <Link href={`/discover?genre=${id}`}>
+                  <a>{name}</a>
+                </Link>
+              </li>
+            )}
+          />
+          <HeaderMenu
+            title="Year"
+            list={getYearMenu()}
+            itemRender={({ id, name }) => (
+              <li key={id}>
+                <Link href={`/discover?year=${id}`}>
+                  <a>{name}</a>
+                </Link>
+              </li>
+            )}
+          />
           <li>
-            <a href="index.html">Home</a>
+            <Link href="/popular">
+              <a>Popular</a>
+            </Link>
           </li>
           <li>
-            <a>Genres</a>
-            <ul>
-              <li>
-                <a href="genre.html">Action</a>
-              </li>
-              <li>
-                <a href="genre.html">Comedy</a>
-              </li>
-              <li>
-                <a href="genre.html">Drama</a>
-              </li>
-              <li>
-                <a href="genre.html">Romance</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a>Year</a>
-            <ul>
-              <li>
-                <a href="year.html">2017</a>
-              </li>
-              <li>
-                <a href="year.html">2016</a>
-              </li>
-              <li>
-                <a href="year.html">2015</a>
-              </li>
-              <li>
-                <a href="year.html">2014</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a>Language</a>
-            <ul>
-              <li>
-                <a href="language.html">English</a>
-              </li>
-              <li>
-                <a href="language.html">German</a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="mostwatched.html">Most Watched</a>
+            <Link href="/top-rated">
+              <a href="mostwatched.html">Top Rated</a>
+            </Link>
           </li>
           <li className="mobsearch">
             <form className="mobform">
