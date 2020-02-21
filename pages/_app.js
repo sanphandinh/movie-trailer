@@ -3,7 +3,6 @@ import 'swiper/css/swiper.min.css';
 import withRedux from 'next-redux-wrapper';
 import makeStore from '../redux/makeStore';
 import { Provider } from 'react-redux';
-import useSWR from 'swr';
 import requester from '../fetch/requester';
 import makeKey from '../fetch/makeKey';
 import { addGenres } from '../redux/slices/genresSlices';
