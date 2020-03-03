@@ -33,9 +33,11 @@ const Header = () => {
   return (
     <header className="header">
       <figure className="logo">
-        <a href="index.html">
-          <img src="img/logo.png" alt="Logo" />
-        </a>
+        <Link href="/">
+          <a>
+            <img src="/img/logo.png" alt="Logo" />
+          </a>
+        </Link>
       </figure>
       <nav className="menu">
         <ul>
@@ -96,7 +98,7 @@ const Header = () => {
       </form>
 
       <div className="toggle">
-        <img src="img/menu.svg" />
+        <img src="/img/menu.svg" />
       </div>
     </header>
   );

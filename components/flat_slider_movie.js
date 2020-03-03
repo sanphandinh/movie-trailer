@@ -44,9 +44,9 @@ const FlatSliderMovie = ({ movies, viewOtherUrl }) => {
         <>
           {movies.map(({ poster_path, title, id }) => (
             <div className="swiper-slide" key={id}>
-              <Link href={`/movie/${id}`}>
+              <Link href="/movie/[id]" as={`/movie/${id}`}>
                 <a>
-                  <Image src={poster_path} size="w185" />
+                  <Image src={poster_path} size="w500" />
                   <h3 className="hometitle">{title}</h3>
                 </a>
               </Link>

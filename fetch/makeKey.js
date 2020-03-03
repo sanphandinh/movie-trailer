@@ -58,7 +58,7 @@ export default function makeKey({ urlKey, body, params, pathParams }) {
     for (const key in pathParams) {
       if (pathParams.hasOwnProperty(key)) {
         const element = pathParams[key];
-        const str = `{key}`;
+        const str = `{${key}}`;
         url = url.replace(str, element);
       }
     }
