@@ -11,7 +11,8 @@ export default function MovieDetail({
   detail,
   videos,
   movieSimilar,
-  fetch
+  fetch,
+  images
 }) {
   const { detailKey, videosOfMovieKey, movieSimilarApiKey } = fetch;
   const { data: _movieDetail } = useSWR(detailKey, { initialData: detail });
@@ -19,32 +20,12 @@ export default function MovieDetail({
   const { data: _movieSimilar } = useSWR(movieSimilarApiKey, {
     initialData: movieSimilar
   });
-  const {
-    backdrop_path,
-    poster_path,
-    title,
-    overview,
-    genres,
-    vote_average
-  } = _movieDetail;
+  const { poster_path, title, overview, genres, vote_average } = _movieDetail;
   const { results } = _movieSimilar;
   const topSimilar = results.slice(0, 6);
   return (
     <Layout>
       <div className="single">
-        {/* <section className="trailer">
-          <h3>Trailer</h3>
-          <div className="trailer_frame">
-            <Image src={backdrop_path} size="w1280" />
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/x73-573aWfs"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </section> */}
         <section className="movie">
           <Image src={poster_path} size="w185" />
           <ul>
@@ -64,7 +45,11 @@ export default function MovieDetail({
             <li>{`${vote_average * 10}% User score`}</li>
           </ul>
         </section>
-        <MediaSection videos={_videos?.results} />
+        <MediaSection
+          videos={_videos?.results}
+          posters={images?.posters}
+          backdrops={images?.backdrops}
+        />
         <section className="related">
           <h3>Related movies</h3>
           {topSimilar.map(({ title, poster_path, id }) => (
@@ -103,18 +88,25 @@ MovieDetail.getInitialProps = async ctx => {
     urlKey: 'movie.GET_SIMILAR_MOVIE_OF_MOVIE',
     pathParams: { movie_id: id }
   });
+  const imagesApiKey = makeKey({
+    urlKey: 'movie.GET_IMAGES_OF_MOVIE',
+    pathParams: { movie_id: id }
+  });
   const movieDetailFetcher = requester(...detailKey);
   const videosFetcher = requester(...videosOfMovieKey);
   const movieSimilarFetcher = requester(...movieSimilarApiKey);
-  const [movieDetail, videos, movieSimilar] = await Promise.all([
+  const imagesFetcher = requester(...imagesApiKey);
+  const [movieDetail, videos, movieSimilar, images] = await Promise.all([
     movieDetailFetcher,
     videosFetcher,
-    movieSimilarFetcher
+    movieSimilarFetcher,
+    imagesFetcher
   ]);
   return {
     id,
     detail: movieDetail,
     videos,
+    images,
     movieSimilar,
     fetch: { detailKey, videosOfMovieKey, movieSimilarApiKey }
   };

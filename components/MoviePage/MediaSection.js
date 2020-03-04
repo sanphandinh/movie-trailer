@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import Videos from './videos';
+import classes from '../../helpers/classes.helper';
+import Backdrops from './backdrops';
+import Posters from './posters';
 
 const MEDIA_TYPE = {
   MOST_POPULAR: 'most_popular',
@@ -15,10 +18,30 @@ const MediaSection = ({ videos = [], posters = [], backdrops = [] }) => {
     <section className="links">
       <h3>Media</h3>
       <ul className="media-tab">
-        <li onClick={() => setSelect(MEDIA_TYPE.MOST_POPULAR)}>Most Popular</li>
-        <li onClick={() => setSelect(MEDIA_TYPE.VIDEOS)}>Videos</li>
-        <li onClick={() => setSelect(MEDIA_TYPE.BACKDROPS)}>Backdrops</li>
-        <li onClick={() => setSelect(MEDIA_TYPE.POSTERS)}>Posters</li>
+        <li
+          className={classes({ active: MEDIA_TYPE.MOST_POPULAR === select })}
+          onClick={() => setSelect(MEDIA_TYPE.MOST_POPULAR)}
+        >
+          Most Popular
+        </li>
+        <li
+          className={classes({ active: MEDIA_TYPE.VIDEOS === select })}
+          onClick={() => setSelect(MEDIA_TYPE.VIDEOS)}
+        >
+          Videos
+        </li>
+        <li
+          className={classes({ active: MEDIA_TYPE.BACKDROPS === select })}
+          onClick={() => setSelect(MEDIA_TYPE.BACKDROPS)}
+        >
+          Backdrops
+        </li>
+        <li
+          className={classes({ active: MEDIA_TYPE.POSTERS === select })}
+          onClick={() => setSelect(MEDIA_TYPE.POSTERS)}
+        >
+          Posters
+        </li>
       </ul>
       <div className={`dlinks content`}>
         <div
@@ -46,15 +69,14 @@ const MediaSection = ({ videos = [], posters = [], backdrops = [] }) => {
             select === MEDIA_TYPE.BACKDROPS ? ' display--block' : ''
           }`}
         >
-          backdrop selected
+          <Backdrops backdrops={backdrops} />
         </div>
         <div
           className={`display--none${
             select === MEDIA_TYPE.POSTERS ? ' display--block' : ''
           }`}
         >
-          {' '}
-          poster selected
+          <Posters posters={posters} />
         </div>
       </div>
       <style jsx>{`
@@ -66,6 +88,9 @@ const MediaSection = ({ videos = [], posters = [], backdrops = [] }) => {
           display: inline;
           cursor: pointer;
           margin: 0px 10px 5px 0px;
+        }
+        .media-tab .active {
+          color: blue;
         }
         .content {
           width: calc(100% - 20px);

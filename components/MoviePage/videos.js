@@ -1,5 +1,5 @@
 import MovieCard from '../movie_card';
-import SwiperReact, { DEFAULT_RENDER_PAGINATION } from '../swiper';
+import SwiperReact from '../swiper';
 
 const Videos = ({ videos = [] }) => {
   return (

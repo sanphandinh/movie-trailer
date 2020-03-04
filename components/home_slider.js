@@ -26,7 +26,6 @@ const HomeSlider = ({ slides }) => (
       effect="fade"
       preventClicks={false}
       preventClicksPropagation={false}
-      useDefaultPagination
       pagination={{ clickable: true }}
       renderPagination={DEFAULT_RENDER_PAGINATION}
       renderSlides={() =>

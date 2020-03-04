@@ -78,7 +78,7 @@ export default {
   // Querying images with a language parameter will filter the results. If you want to include a fallback language (especially useful for backdrops) you can use the include_image_language parameter.
   // This should be a comma seperated value like so: include_image_language=en,null.
   GET_IMAGES_OF_MOVIE: {
-    url: '/{movie_id}/keywords',
+    url: '/{movie_id}/images',
     params: 'api_key, language, include_image_language'
   },
   //Get the external ids for a movie. We currently support the following external sources.
