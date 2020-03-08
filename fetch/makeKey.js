@@ -63,7 +63,7 @@ export default function makeKey({ urlKey, body, params, pathParams }) {
       }
     }
   }
-  let _body = {};
+  let _body = null;
   if (body) {
     _body = getBody(body);
   }
