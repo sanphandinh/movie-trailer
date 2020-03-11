@@ -4,7 +4,14 @@ const Image = ({ src, size, ...rest }) => {
   const { secure_base_url } =
     useSelector(state => state.configuration?.images) || {};
   return (
-    <img src={`${secure_base_url}${size || 'original'}${src}`} {...rest} />
+    <img
+      src={
+        src
+          ? `${secure_base_url}${size || 'original'}${src}`
+          : '/images/default.jpg'
+      }
+      {...rest}
+    />
   );
 };
 

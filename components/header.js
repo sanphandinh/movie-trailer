@@ -47,7 +47,7 @@ const Header = () => {
             list={genres}
             itemRender={({ id, name }) => (
               <li key={id}>
-                <Link href={`/discover?genre=${id}`}>
+                <Link href={`/discover?with_genres=${id}`}>
                   <a>{name}</a>
                 </Link>
               </li>
@@ -71,7 +71,7 @@ const Header = () => {
           </li>
           <li>
             <Link href="/top-rated">
-              <a href="mostwatched.html">Top Rated</a>
+              <a>Top Rated</a>
             </Link>
           </li>
           <li className="mobsearch">
