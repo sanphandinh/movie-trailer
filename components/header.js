@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
+import SearchKeyword from './search_keyword';
+import Router from 'next/router';
 
 const HeaderMenu = ({ title, list = [], titleUrl, itemRender }) => {
   return (
@@ -30,6 +32,15 @@ const getYearMenu = () => {
 
 const Header = () => {
   const genres = useSelector(state => state.genres) || [];
+  const _onSelect = (val, item) => {
+    Router.push({
+      pathname: '/search',
+      query: {
+        keyword: item?.name,
+        id: val
+      }
+    });
+  };
   return (
     <header className="header">
       <figure className="logo">
@@ -76,11 +87,12 @@ const Header = () => {
           </li>
           <li className="mobsearch">
             <form className="mobform">
-              <input
+              <SearchKeyword
                 type="text"
                 name="s"
                 className="mobsearchfield"
                 placeholder="Search..."
+                onSelect={_onSelect}
               />
               <input type="submit" value="" className="mobsearchsubmit" />
             </form>
@@ -88,11 +100,12 @@ const Header = () => {
         </ul>
       </nav>
       <form className="search">
-        <input
+        <SearchKeyword
           type="text"
           name="s"
           className="searchfield"
           placeholder="Search..."
+          onSelect={_onSelect}
         />
         <input type="submit" value="" className="searchsubmit" />
       </form>
